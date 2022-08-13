@@ -74,8 +74,12 @@ class Promotion extends Controller
         $data = $this->promotionMdel->find($id);
         // return json_encode($data);
         $isValid = false;
-        // isPast
-        if((strtotime($data['publish_start']) > time()) && (strtotime($data['publish_end']) < time())) $isValid = true;
+        $publish_start = date('Y-m-d', strtotime($data['publish_start']));
+        $publish_end = date('Y-m-d', strtotime($data['publish_end']));
+
+        if((strtotime($publish_end) >= time()) && (strtotime($publish_start) <= time())) {
+            $isValid = true;
+        }
 
         return ($isValid) ? "Valid" : "Expired";
 
@@ -86,8 +90,12 @@ class Promotion extends Controller
         $data = $this->promotionMdel->find($id);
         // return json_encode($data);
         $isValid = false;
-        // isPast
-        if((strtotime($data['booking_start']) > time()) && (strtotime($data['booking_end']) < time())) $isValid = true;
+        $booking_start = date('Y-m-d', strtotime($data['booking_start']));
+        $booking_end = date('Y-m-d', strtotime($data['booking_end']));
+
+        if((strtotime($booking_end) >= time()) && (strtotime($booking_start) >= time())) {
+            $isValid = true;
+        }
 
         return ($isValid) ? "Valid" : "Expired";
     }
@@ -97,8 +105,12 @@ class Promotion extends Controller
         $data = $this->promotionMdel->find($id);
         // return json_encode($data);
         $isValid = false;
-        // isPast
-        if((strtotime($data['stay_start']) > time()) && (strtotime($data['stay_end']) < time())) $isValid = true;
+        $stay_start = date('Y-m-d', strtotime($data['stay_start']));
+        $stay_end = date('Y-m-d', strtotime($data['stay_end']));
+
+        if((strtotime($stay_end) >= time()) && (strtotime($stay_start) >= time())) {
+            $isValid = true;
+        }
 
         return ($isValid) ? "Valid" : "Expired";
     }

@@ -32,4 +32,29 @@ class Rooms extends Controller
         $table = $this->room_rate->where(['room_id' => $room_id])->findAll();
         return $table;
     }
+
+    public  function getPromoPrice($roomrateArr) {
+        // $data = $this->getRoomRate($room_id);
+        if($roomrateArr['no_promo']==0) {
+            $data = $this->room_rate->where([
+                'room_id' => $roomrateArr['room_id'],
+                'date' => $roomrateArr['date']
+            ])->findAll();
+            
+            $rate = $data[0]['rate'];
+            // jika promo 10%
+            $diskon = 10;
+            if($roomrateArr['no_promo']==0) {
+                // echo "<br>" . ($data[0]['rate']);
+                $rate = $rate - ($rate * ($diskon/100));
+            }
+
+            return $rate;
+        }
+    }
+
+    public function getKomisiPrice($diskonprice) {
+        $komisi = 10;
+        return $diskonprice - ($diskonprice * ($komisi/100));
+    }
 }

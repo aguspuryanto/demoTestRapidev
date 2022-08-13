@@ -20,8 +20,17 @@
             <td><?= ++$key ?></td>
             <td><?= $roomrate['name'] ?></td>
             <td><?= date("Y-m-d", strtotime($roomrate['date'])) ?></td>
-            <td><?= $roomrate['rate'] ?></td>
-            <td><?= ($roomrate['no_promo']==1) ? "Promo" : ""; ?></td>
+            <td>
+                <?= $roomrate['rate'] ?>
+                
+            </td>
+            <td>
+                <?= ($roomrate['no_promo']==0) ? "Promo" : ""; ?><br>
+                <?php if($roomrate['no_promo']==0) : 
+                echo "Harga s/ Diskon = " . $ctrl->getPromoPrice($roomrate) . "<br>";
+                echo "Komisi s/ Diskon = " . $ctrl->getKomisiPrice($ctrl->getPromoPrice($roomrate));
+                endif; ?>
+            </td>
             <td>
                 NA
             </td>

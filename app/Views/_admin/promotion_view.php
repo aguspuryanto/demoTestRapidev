@@ -26,13 +26,11 @@
             // include_once ('promotion_table.php');
         ?>
 
-        <?php $this->section('scripts')?>
         <script type="text/javascript">
         $(function() {
             $('input[name*="p_"]').daterangepicker();
         });
         </script>
-        <?php $this->endSection()?>
 
     </main>
   </div>
